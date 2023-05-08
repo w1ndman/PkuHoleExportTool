@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         PKU-Hole export tool
-// @author       one of the Anonymous PKUer
+// @author       WindMan
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @license      MIT License
@@ -97,10 +97,10 @@ async function comments(holeid) {
 
 		const data_ = await response.json();
 
-		let data = data_["data"]["data"];
+		let data = data_.data.data;
 		fetchList.push(data);
 
-		if (data_["data"]["next_page_url"] == null) {
+		if (data_.data.next_page_url == null) {
 			break;
 		}
 		sleep(50);
@@ -127,24 +127,27 @@ function comment2text(comments_) {
 		let comment_list_ = comments_[i];
 		for (let j = 0; j < comment_list_.length; j++) {
 			let comment_ = comment_list_[j];
-			buffer_ += `${comment_["name"]}: ${comment_["text"]}\n`;
+			buffer_ += `${comment_.name}: ${comment_.text}\n`;
 		}
 	}
 	return buffer_;
 }
 
-async function export_holes() {
+async function export_holes(buttonElement) {
 	let buffer = "";
+	let holenum = 0;
 	let followsholes = await followed_holes();
 	for (let i = 0; i < followsholes.length; i++) {
 		let holelist = followsholes[i];
 		let buffer_ = "";
 		for (let j = 0; j < holelist.length; j++) {
 			let hole = holelist[j];
-			buffer_ += `Id:${hole["pid"]}  Likenum:${hole["likenum"]}  Reply:${hole["reply"]
-				}  Time:${Date(hole["timestamp"] * 1000).toLocaleString()}\n`;
-			let comments_ = await comments(hole["pid"]);
-			buffer_ += `洞主: ${hole["text"]}\n`;
+			buffer_ += `Id:${hole.pid}  Likenum:${hole.likenum}  Reply:${hole.reply
+				}  Time:${Date(hole.timestamp * 1000).toLocaleString()}\n`;
+			let comments_ = await comments(hole.pid);
+			holenum += 1;
+			buttonElement.textContent = holenum.toString();
+			buffer_ += `洞主: ${hole.text}\n`;
 			buffer_ += comment2text(comments_);
 
 			buffer_ += "\n======================\n\n";
@@ -154,9 +157,9 @@ async function export_holes() {
 	download_file(buffer);
 }
 
-async function export_() {
+async function export_(buttonElement) {
 	console.log("export.");
-	await export_holes();
+	await export_holes(buttonElement);
 }
 
 (window.onload = function () {
@@ -168,7 +171,7 @@ async function export_() {
 	buttonElement.style.minWidth = "60px";
 	buttonElement.addEventListener("click", async function () {
 		this.textContent = "稍候";
-		await export_();
+		await export_(this);
 		this.textContent = "导出";
 	});
 	if (selectElement) {
