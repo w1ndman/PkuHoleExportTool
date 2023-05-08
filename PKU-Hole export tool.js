@@ -141,10 +141,10 @@ async function export_holes() {
 		let buffer_ = "";
 		for (let j = 0; j < holelist.length; j++) {
 			let hole = holelist[j];
-			buffer_ += `id:${hole["pid"]}  likenum:${hole["likenum"]}  reply:${hole["reply"]
-				}  time:${Date(hole["timestamp"] * 1000).toLocaleString()}\n`;
+			buffer_ += `Id:${hole["pid"]}  Likenum:${hole["likenum"]}  Reply:${hole["reply"]
+				}  Time:${Date(hole["timestamp"] * 1000).toLocaleString()}\n`;
 			let comments_ = await comments(hole["pid"]);
-			buffer_ += `洞主: ${hole["text"]}`;
+			buffer_ += `洞主: ${hole["text"]}\n`;
 			buffer_ += comment2text(comments_);
 
 			buffer_ += "\n======================\n\n";
