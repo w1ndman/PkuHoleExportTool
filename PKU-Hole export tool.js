@@ -159,20 +159,30 @@ async function export_holes(buttonElement) {
 
 async function export_(buttonElement) {
 	console.log("export.");
-	await export_holes(buttonElement);
+	buttonElement.textContent = "稍候";
+	const confirm_ = confirm(
+		'是否确定要导出关注列表？\n导出时会实时显示导出树洞的数目\n若想要停止导出,直接刷新浏览器界面即可'
+	);
+	if (confirm_) {
+		await export_holes(buttonElement);
+	}
+	buttonElement.textContent = "导出";
+
 }
 
 (window.onload = function () {
 	"use strict";
-
+	let exporting = false;
 	const selectElement = document.querySelector(".select-header.control-search");
 	const buttonElement = document.createElement("button");
 	buttonElement.textContent = "导出";
 	buttonElement.style.minWidth = "60px";
 	buttonElement.addEventListener("click", async function () {
-		this.textContent = "稍候";
-		await export_(this);
-		this.textContent = "导出";
+		if (!exporting) {
+			exporting = true;
+			await export_(this);
+			exporting = false;
+		}
 	});
 	if (selectElement) {
 		selectElement.insertAdjacentElement("afterend", buttonElement);
