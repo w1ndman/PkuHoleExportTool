@@ -65,7 +65,7 @@ async function followed_holes() {
 		if (data_.data.next_page_url == null) {
 			break;
 		}
-		sleep(100);
+		await sleep(100);
 	}
 	return fetchList;
 }
@@ -103,7 +103,7 @@ async function comments(holeid) {
 		if (data_.data.next_page_url == null) {
 			break;
 		}
-		sleep(50);
+		await sleep(50);
 	}
 	return fetchList;
 }
