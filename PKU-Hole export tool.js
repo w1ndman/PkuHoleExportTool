@@ -125,6 +125,7 @@ function comment2text(comments_) {
 	let buffer_ = "";
 	for (let i = 0; i < comments_.length; i++) {
 		let comment_list_ = comments_[i];
+		if (!comment_list_) continue;
 		for (let j = 0; j < comment_list_.length; j++) {
 			let comment_ = comment_list_[j];
 			buffer_ += `${comment_.name}: ${comment_.text}\n`;
