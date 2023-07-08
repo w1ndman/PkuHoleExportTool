@@ -122,16 +122,17 @@ function download_file(text) {
 }
 
 function comment2text(comments_) {
-	let buffer_ = "";
-	for (let i = 0; i < comments_.length; i++) {
-		let comment_list_ = comments_[i];
-		if (!comment_list_) continue;
-		for (let j = 0; j < comment_list_.length; j++) {
-			let comment_ = comment_list_[j];
-			buffer_ += `${comment_.name}: ${comment_.text}\n`;
-		}
-	}
+    if(comments_[0] != undefined) { // 排除没有评论的情况
+        let buffer_ = "";
+        for (let i = 0; i < comments_.length; i++) {
+            let comment_list_ = comments_[i];
+            for (let j = 0; j < comment_list_.length; j++) {
+                let comment_ = comment_list_[j];
+                buffer_ += `${comment_.name}: ${comment_.text}\n`;
+            }
+        }
 	return buffer_;
+    }
 }
 
 async function export_holes(buttonElement) {
@@ -143,8 +144,10 @@ async function export_holes(buttonElement) {
 		let buffer_ = "";
 		for (let j = 0; j < holelist.length; j++) {
 			let hole = holelist[j];
+            console.log('===========');
+            console.log(hole);
 			buffer_ += `Id:${hole.pid}  Likenum:${hole.likenum}  Reply:${hole.reply
-				}  Time:${Date(hole.timestamp * 1000).toLocaleString()}\n`;
+				}  Time:${new Date(hole.timestamp * 1000).toLocaleString()}\n`;
 			let comments_ = await comments(hole.pid);
 			holenum += 1;
 			buttonElement.textContent = holenum.toString();
