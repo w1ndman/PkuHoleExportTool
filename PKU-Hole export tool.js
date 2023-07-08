@@ -145,7 +145,7 @@ async function export_holes(buttonElement) {
 		for (let j = 0; j < holelist.length; j++) {
 			let hole = holelist[j];
             console.log('===========');
-            console.log(hole);
+            console.log(hole.pid);
 			buffer_ += `Id:${hole.pid}  Likenum:${hole.likenum}  Reply:${hole.reply
 				}  Time:${new Date(hole.timestamp * 1000).toLocaleString()}\n`;
 			let comments_ = await comments(hole.pid);
