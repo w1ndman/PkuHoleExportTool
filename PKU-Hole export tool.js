@@ -108,11 +108,11 @@ async function comments(holeid) {
 	return fetchList;
 }
 
-function download_file(text) {
+function download_file(text,filename) {
 	const blob = new Blob([text], { type: "text/plain" });
 
 	const downloadLink = document.createElement("a");
-	downloadLink.download = "export.txt";
+	downloadLink.download = filename;
 	downloadLink.href = URL.createObjectURL(blob);
 	downloadLink.textContent = "Download";
 
@@ -138,8 +138,10 @@ function comment2text(comments_) {
 async function export_holes(buttonElement) {
 	let buffer = "";
 	let holenum = 0;
+	let file_num = 0
 	let followsholes = await followed_holes();
-	for (let i = 0; i < followsholes.length; i++) {
+	let i = 0;
+	for (; i < followsholes.length; i++) {
 		let holelist = followsholes[i];
 		let buffer_ = "";
 		for (let j = 0; j < holelist.length; j++) {
@@ -153,12 +155,18 @@ async function export_holes(buttonElement) {
 			buttonElement.textContent = holenum.toString();
 			buffer_ += `洞主: ${hole.text}\n`;
 			buffer_ += comment2text(comments_);
-
 			buffer_ += "\n======================\n\n";
 		}
 		buffer += buffer_;
+		if ((i+1)%4 == 0) {
+			download_file(buffer,(file_num+1).toString()+"-export.txt");
+			file_num += 1;
+			buffer = "";
+		}
 	}
-	download_file(buffer);
+	if ((i+1)%4 != 0) {
+		download_file(buffer,(file_num+1).toString()+"-export.txt");	
+	}
 }
 
 async function export_(buttonElement) {
