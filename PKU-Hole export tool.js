@@ -173,7 +173,7 @@ async function export_(buttonElement) {
 	console.log("export.");
 	buttonElement.textContent = "稍候";
 	const confirm_ = confirm(
-		'是否确定要导出关注列表？\n导出时会实时显示导出树洞的数目\n若想要停止导出,直接刷新浏览器界面即可'
+		'是否确定要导出关注列表？\n每100条树洞下载一次文件\n导出时会实时显示导出树洞的数目\n若想要停止导出,直接刷新浏览器界面即可'
 	);
 	if (confirm_) {
 		await export_holes(buttonElement);
