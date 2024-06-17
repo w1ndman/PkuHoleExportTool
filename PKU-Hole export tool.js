@@ -213,7 +213,7 @@ async function export_cited_holes(buttonElement, holeids, file_num) {
 			buffer += `洞主: ${hole.text}\n`;
 			buffer += comment2text(comments_);
 			buffer += "\n======================\n\n";
-	
+			sleep(10);
 		}
 
 		if ((i + 1) % 100 == 0 || i == holeids.length - 1) {
@@ -253,6 +253,7 @@ async function export_followed_holes(buttonElement, mode) {
 		buffer += `Id:${hole.pid}  Likenum:${hole.likenum}  Reply:${hole.reply
 			}  Time:${new Date(hole.timestamp * 1000).toLocaleString()}\n`;
 		let comments_ = await comments(hole.pid);
+		holenum += 1;
 		buttonElement.textContent = holenum.toString();
 		buffer += `洞主: ${hole.text}\n`;
 		buffer += comment2text(comments_);
@@ -261,7 +262,7 @@ async function export_followed_holes(buttonElement, mode) {
 		let extracted_pids_ = await process_extract(hole, buffer, mode);
 		extracted_pids_.forEach(pid => extracted_pids.push(pid));
 
-	
+		sleep(10);
 		if ((i + 1) % 100 == 0 || i == holes.length - 1) {
 			download_file(buffer, (file_num + 1).toString() + "-export.txt");
 			file_num += 1;
