@@ -3,6 +3,11 @@
 
 油猴链接： [https://greasyfork.org/zh-CN/scripts/465805-pku-hole-export-tool](https://greasyfork.org/zh-CN/scripts/465805-pku-hole-export-tool)
 
+## 功能
+* 分段导出关注树洞
+* 导出关注树洞的引用树洞（正文中或者评论中）
+
+
 ## 使用方式
 1. 安装油猴插件并安装本脚本
 2. 如果安装正常，这里会显示“导出”按钮：
