@@ -34,7 +34,7 @@ function _getCookieObj() {
 
 async function followed_holes() {
 	const fetchList = [];
-	let pages = 60;
+	let pages = 256;
 	for (let page = 1; page <= pages; ++page) {
 		const response = await fetch(
 			`https://treehole.pku.edu.cn/api/follow_v2?page=${page}&limit=25`,
