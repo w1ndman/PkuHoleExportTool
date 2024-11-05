@@ -2,7 +2,7 @@
 // @name         PKU-Hole export tool
 // @author       WindMan
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.0.2
 // @license      MIT License
 // @description  导出树洞中的关注列表
 // @match        https://treehole.pku.edu.cn/web/*
@@ -197,6 +197,10 @@ async function process_extract(hole, comments_str, mode) {
 
 async function export_cited_holes(buttonElement, holeids, file_num) {
 	let buffer = "";
+	let jsonbuffer = {
+		"holes": [],
+		"comments": []
+	};
 	let holenum = 0;
 	for (let i = 0; i < holeids.length; i++) {
 		let holeid = holeids[i];
@@ -208,6 +212,8 @@ async function export_cited_holes(buttonElement, holeids, file_num) {
 			buffer += `Id:${hole.pid}  Likenum:${hole.likenum}  Reply:${hole.reply
 				}  Time:${new Date(hole.timestamp * 1000).toLocaleString()}\n`;
 			let comments_ = await comments(hole.pid);
+			jsonbuffer.holes.push(hole);
+			jsonbuffer.comments.push(comments_);
 			holenum += 1;
 			buttonElement.textContent = holenum.toString();
 			buffer += `洞主: ${hole.text}\n`;
@@ -218,8 +224,13 @@ async function export_cited_holes(buttonElement, holeids, file_num) {
 
 		if ((i + 1) % 100 == 0 || i == holeids.length - 1) {
 			download_file(buffer, (file_num + 1).toString() + "-export-cited.txt");
+			download_file(JSON.stringify(jsonbuffer), (file_num + 1).toString() + "-export-cited.json");
 			file_num += 1;
 			buffer = "";
+			jsonbuffer = {
+				"holes": [],
+				"comments": []
+			};
 		}
 	}
 }
@@ -230,6 +241,10 @@ async function export_followed_holes(buttonElement, mode) {
 	// 2: export followed holes and holes in the text
 	// 3: export followed holes and holes in the text and comments
 	let buffer = "";
+	let jsonbuffer = {
+		"holes": [],
+		"comments": []
+	};
 	let holenum = 0;
 	let file_num = 0;
 	let extracted_pids = new Array();
@@ -253,6 +268,8 @@ async function export_followed_holes(buttonElement, mode) {
 		buffer += `Id:${hole.pid}  Likenum:${hole.likenum}  Reply:${hole.reply
 			}  Time:${new Date(hole.timestamp * 1000).toLocaleString()}\n`;
 		let comments_ = await comments(hole.pid);
+		jsonbuffer.holes.push(hole);
+		jsonbuffer.comments.push(comments_);
 		holenum += 1;
 		buttonElement.textContent = holenum.toString();
 		buffer += `洞主: ${hole.text}\n`;
@@ -265,8 +282,13 @@ async function export_followed_holes(buttonElement, mode) {
 		sleep(10);
 		if ((i + 1) % 100 == 0 || i == holes.length - 1) {
 			download_file(buffer, (file_num + 1).toString() + "-export.txt");
+			download_file(JSON.stringify(jsonbuffer), (file_num + 1).toString() + "-export.json");
 			file_num += 1;
 			buffer = "";
+			jsonbuffer = {
+				"holes": [],
+				"comments": []
+			};
 		}
 	}
 	// download cited holes
