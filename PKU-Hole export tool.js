@@ -223,8 +223,8 @@ async function export_cited_holes(buttonElement, holeids, file_num) {
 		}
 
 		if ((i + 1) % 100 == 0 || i == holeids.length - 1) {
-			download_file(buffer, (file_num + 1).toString() + "-export-cited.txt");
-			download_file(JSON.stringify(jsonbuffer), (file_num + 1).toString() + "-export-cited.json");
+			download_file(buffer, "export-cited-part-" + (file_num + 1).toString() + ".txt");
+			download_file(JSON.stringify(jsonbuffer), "export-cited-part-" + (file_num + 1).toString() + ".json");
 			file_num += 1;
 			buffer = "";
 			jsonbuffer = {
@@ -281,8 +281,8 @@ async function export_followed_holes(buttonElement, mode) {
 
 		sleep(10);
 		if ((i + 1) % 100 == 0 || i == holes.length - 1) {
-			download_file(buffer, (file_num + 1).toString() + "-export.txt");
-			download_file(JSON.stringify(jsonbuffer), (file_num + 1).toString() + "-export.json");
+			download_file(buffer, "export-part-" + (file_num + 1).toString() + ".txt");
+			download_file(JSON.stringify(jsonbuffer), "export-part-" + (file_num + 1).toString() + ".json");
 			file_num += 1;
 			buffer = "";
 			jsonbuffer = {
@@ -328,7 +328,7 @@ async function export_(buttonElement) {
 		return;
 	}
 	if (!['1', '2', '3'].includes(mode)) {
-		alert("输入错误，请重新运行脚本并输入正确的数字");
+		alert("输入错误，若想重试请重新点击导出按钮并输入正确的数字");
 		return;
 	}
 
