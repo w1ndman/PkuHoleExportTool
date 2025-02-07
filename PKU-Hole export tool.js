@@ -343,7 +343,7 @@ async function export_(buttonElement) {
 (window.onload = function () {
 	"use strict";
 	let exporting = false;
-	const selectElement = document.querySelector(".select-header.control-search");
+	const searchbtnElement = document.querySelector("div.search-btn");
 	const buttonElement = document.createElement("button");
 	buttonElement.textContent = "导出";
 	buttonElement.style.minWidth = "60px";
@@ -355,8 +355,7 @@ async function export_(buttonElement) {
 			exporting = false;
 		}
 	});
-	if (selectElement) {
-		selectElement.insertAdjacentElement("afterend", buttonElement);
-		selectElement.style.width = "50%";
+	if (searchbtnElement) {
+		searchbtnElement.insertAdjacentElement("beforebegin", buttonElement);
 	}
 })();
