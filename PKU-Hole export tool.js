@@ -2,7 +2,7 @@
 // @name         PKU-Hole export tool
 // @author       WindMan
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.1.0
 // @license      MIT License
 // @description  导出树洞中的关注列表
 // @match        https://treehole.pku.edu.cn/web/*
