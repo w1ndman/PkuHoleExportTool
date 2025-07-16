@@ -34,7 +34,7 @@ function _getCookieObj() {
 
 async function followed_holes() {
 	const fetchList = [];
-	let pages = 256;
+	let pages = 1024;
 	for (let page = 1; page <= pages; ++page) {
 		const response = await fetch(
 			`https://treehole.pku.edu.cn/api/follow_v2?page=${page}&limit=25`,
@@ -72,7 +72,7 @@ async function followed_holes() {
 
 async function comments(holeid) {
 	const fetchList = [];
-	let pages = 120;
+	let pages = 240;
 	for (let page = 1; page <= pages; ++page) {
 		const response = await fetch(
 			`https://treehole.pku.edu.cn/api/pku_comment_v3/${holeid}?page=${page}&limit=15&sort=asc`,
