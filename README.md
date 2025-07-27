@@ -13,4 +13,5 @@
 2. 如果安装正常，这里会显示“导出”按钮：
 <img width="411" alt="tree-hole" src="https://github.com/w1ndman/PkuHoleExportTool/assets/132929861/0847ba07-b7c3-423c-885c-1e01bf74b1e2">
 
-3. 点击“导出即可”
+3. 点击“导出即可”，通常会导出txt和json两种格式的文件
+4. (可选) 导出的txt格式可以直接阅读，而json格式文件可以导入至[https://treehole-player.vercel.app/](https://treehole-player.vercel.app/)网站，可以获得接近直接刷树洞的效果。
