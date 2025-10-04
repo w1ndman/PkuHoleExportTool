@@ -13,7 +13,7 @@
 ### 安装
 1. 安装油猴插件并安装本脚本（若不知道怎么安装，可参照[https://blog.csdn.net/m0_64979660/article/details/139644675](https://blog.csdn.net/m0_64979660/article/details/139644675)）
 2. 如果安装正常，这里会显示“导入/导出”按钮：
-<img width="543" height="227" alt="截屏2025-10-05 01 04 24" src="https://github.com/user-attachments/assets/bea3acac-b295-4ab9-9c38-775ac660ab78" />
+<img width="543" height="227" alt="treehole-pics" src="https://github.com/user-attachments/assets/bea3acac-b295-4ab9-9c38-775ac660ab78" />
 
 
 ### 导出
