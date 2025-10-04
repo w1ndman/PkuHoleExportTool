@@ -13,7 +13,8 @@
 ### 安装
 1. 安装油猴插件并安装本脚本（若不知道怎么安装，可参照[https://blog.csdn.net/m0_64979660/article/details/139644675](https://blog.csdn.net/m0_64979660/article/details/139644675)）
 2. 如果安装正常，这里会显示“导入/导出”按钮：
-<img width="411" alt="tree-hole" src="https://github.com/w1ndman/PkuHoleExportTool/assets/132929861/0847ba07-b7c3-423c-885c-1e01bf74b1e2">
+<img width="543" height="227" alt="截屏2025-10-05 01 04 24" src="https://github.com/user-attachments/assets/bea3acac-b295-4ab9-9c38-775ac660ab78" />
+
 
 ### 导出
 1. 点击“导入/导出”，选择导出模式并继续，最后会导出txt和json两种格式的文件。
